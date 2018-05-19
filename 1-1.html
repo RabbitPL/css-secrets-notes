@@ -1,0 +1,114 @@
+<html>
+
+<head>
+    <title>css编码技巧--尽量减少代码重复</title>
+    <style>
+        /* 未改进前css */
+        
+        .button {
+            padding: 6px 16px;
+            border: 1px solid #446d88;
+            background: #58a linear-gradient(#77a0bb, #58a);
+            border-radius: 4px;
+            box-shadow: 0 1px 5px gray;
+            color: white;
+            text-shadow: 0 -1px 1px #335166;
+            font-size: 20px;
+            line-height: 30px;
+        }
+        /* 当某些值相互依赖时，应该把它们的相互关系用代码表达出来 */
+        /* 行高是字体的1.5倍: font-size: 20px; line-height: 1.5; */
+        /* 如果父级字号增大，则不得修改每一处字体尺寸，改用百分比或em单位, font-size: 125%;(假设父级字体为16px;) */
+        /* 此时，会不协调，因为其他效果都没有缩放，因此可以改为依赖字号进行缩放 */
+        /* 以上，需要重新审视到底哪些效果应该跟着按钮一起放大， 而哪些效果保持不变(比如边框不需要改变) */
+        
+        .button-change {
+            padding: .3em .8em;
+            border: 1px solid #446d88;
+            background: #58a linear-gradient(#77a0bb, #58a);
+            border-radius: .2em;
+            box-shadow: 0 .05em .25em gray;
+            color: white;
+            text-shadow: 0 -.05em .05em #335166;
+            font-size: 125%;
+            line-height: 1.5;
+        }
+        /* 以上，除了尺寸的修改，颜色也是一个变数 */
+        /* 只要把半透明的黑色或白色叠加在主色调上，即可产生主色调的亮色或暗色变体, 使用rgba(0,0,0,.1)和 rgba(0,0,0,.5) */
+        
+        .button-color {
+            padding: .3em .8em;
+            border: 1px solid rgba(0, 0, 0, .1);
+            background: #58a linear-gradient(hsla(0, 0%, 100%, .2), transparent);
+            border-radius: .2em;
+            box-shadow: 0 .05em .25em rgba(0, 0, 0, .5);
+            color: white;
+            text-shadow: 0 -.05em .05em rgba(0, 0, 0, .5);
+            font-size: 125%;
+            line-height: 1.5;
+        }
+        /* 修改颜色，只需要修改主色调 */
+        
+        .button-color.cancel {
+            background-color: #c00;
+        }
+        
+        .button-color.ok {
+            background-color: #6b0;
+        }
+        /* 代码易维护 vs 代码量少：代码易维护和代码量少不可兼得 
+           1. 实现添加一个10px的边框，但左侧边框不设置
+              border-width: 10px 10px 10px 0;
+              后期需要修改边框宽度则需要修改三个值
+              改为: border-width: 10px;  border-left-width: 0;
+        */
+        /* 2. currentColor: CSS有史以来的第一个变量，它并没有被绑定到一个固定的颜色值，而一直被解析为color */
+        
+        .current-color {
+            height: .5em;
+            background: currentColor;
+        }
+        /* 若不设置body，则currentColor为black，若设body为红色，则currentColor为red 
+        body {
+            color: red;
+        } */
+        /* 3. 继承:inherit可以用在任何css属性中，而且它总是绑定到父元素的计算值(对于伪元素来说，则会生成该伪元素的宿主元素) */
+        /* inherit关键字对于背景色同样非常重要 */
+        
+        .callout {
+            position: relative;
+            height: 2em;
+            width: 20em;
+            border: 1px solid #ddd;
+            background: white;
+        }
+        
+        .callout::before {
+            content: '';
+            position: absolute;
+            top: -.4em;
+            left: 1em;
+            padding: .35em;
+            background: inherit;
+            /*继承background*/
+            border: inherit;
+            /*继承border*/
+            border-right: 0;
+            border-bottom: 0;
+            transform: rotate(45deg);
+        }
+        /* 相信你的眼睛，而不是数字：例如，圆形的字形与矩形字形相比需要稍微放大一些 */
+    </style>
+</head>
+
+<body>
+    <a class="button"></a>
+    <a class="button-change"></a>
+    <a class="button-color"></a>
+    <a class="button-color cancel"></a>
+    <a class="button-color ok"></a>
+    <hr class="current-color">
+    <div class="callout" contenteditable="true">
+</body>
+
+</html>
