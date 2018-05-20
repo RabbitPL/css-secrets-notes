@@ -1,0 +1,165 @@
+<html>
+
+<head>
+    <title>背景与边框--多重边框</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            margin: 20px;
+        }
+       /* 背景知识: box-shadow的基本用法；相关规范: css背景和边框、CSS基本UI特性 */
+
+       /* 多重边框的实现：background-image或者其他hack方案 */
+       /* box-shadow: 接受第四个参数(称作''扩张半径')，通过指定正值或负值，可以让投影面积加大或者减小
+            一个正值的扩张半径加上两个为0的偏移量以及为0的模糊之，得到的‘投影’其实就像一道实线边框
+        */
+        .demo-1 {
+           background: yellowgreen;
+           box-shadow: 0 0 0 10px #655;
+        }
+
+        /* border属性，可以实现以上效果，但是box-shadow支持逗号分割语法，我们可以创建任意数量的投影 */
+       .demo-2 {
+            background: yellowgreen;
+            box-shadow: 0 0 0 10px #665, 
+                    0 0 0 15px deeppink, 
+                    0 2px 5px 15px rgba(0, 0, 0, .5);
+       }
+       /* box-shadow是层层叠加的，第一层投影位于最顶层(里面)依次类推，因此需要调整扩张半径。 以上第一层边框宽度为10px，则第二层边框定义时，数字应该为(第一层+本层宽度)，即本层为5px.(10px + 5px = 15px) */
+
+       /* box-shadow使用注意事项
+       1. 投影的行为跟边框不完全一致，它不会影响布局，而且也不会受到box-sizing属性的影响
+       2. 它并不会响应鼠标事件 */
+       
+       .demo-3 {
+           width: 100%;
+           display: block;
+           height: 300px;
+       }
+       /* 设置border其宽度计入盒模型，设置box-shadow不占盒模型。
+            其中3-1宽度为200px=15px + 元素宽度170px + 15px；
+            3-2宽度为200px.box-shadow层叠覆盖，左侧覆盖在3-1上，右侧被3-3覆盖
+            3-3宽度为230px，230px=15px(pading) + width(200px) + 15px(pading)
+            3-4同3-2不受影响
+            以上主要考察box-sizing属性
+        */
+       .demo-3-1 {
+           border: 15px solid #655;
+           margin: 0;
+           box-sizing: border-box;
+           background: yellowgreen;
+       }
+       .demo-3-2 {
+            box-shadow: 0 0 0 10px deeppink, 0 0 0 15px deeppink;
+            margin: 0;
+            box-sizing: border-box;
+            background: yellowgreen;
+       }
+       .demo-3-3 {
+           border: 15px solid #655;
+           margin: 0;
+           box-sizing: content-box;
+           background: yellowgreen;
+       }
+       .demo-3-4 {
+            box-shadow: 0 0 0 10px deeppink, 0 0 0 15px deeppink;
+            margin: 0;
+            box-sizing: content-box;
+            background: yellowgreen;
+       }
+       /* 注意：外圈是由内向外，内圈是由外向内 */
+       /* 元素宽度为230px(包括padding15+15=30px) */
+       .demo-3-6 {
+            box-shadow: 0 0 0 10px deeppink inset, 0 0 0 15px #efefef inset;
+            box-sizing: content-box;
+            background: yellowgreen;
+            padding: 0;
+            padding: 15px;
+       }
+
+       /* outline方案：
+            1. 某些情况下，只需要两层边框，可以先设置一层常规边框，再加上outline(描边)属性产生外层的边框 
+            2. 该方法十分灵活，box-shadow方案只能模拟实线边框
+       */
+       .demo-4 {
+           background: yellowgreen;
+           border: 10px solid #655;
+           outline: 5px solid deeppink;
+           display: block;
+       }
+
+        /* 描边另一个好处，可以通过outline-offset属性来控制它跟元素边缘之间的间距离，该属性可以接受负值 */
+        .demo-5 {
+            width: 100%;
+            display: block;
+        }
+        .demo-5-1 {
+            background: yellowgreen;
+            border: 10px solid #655;
+            outline: 5px solid deeppink;
+            outline-offset: 3px;
+        }
+        .demo-5-2 {
+            background: yellowgreen;
+            border: 10px solid #655;
+            outline: 5px solid deeppink;
+            /* 注意：-15为向内移动15px，刚好为边框10px与自身宽度5px。 */
+            outline-offset: -15px;
+        }
+        .demo-5-3 {
+            background: yellowgreen;
+            border: 10px solid #655;
+            outline: 5px solid deeppink;
+            /* 注意：-10为向内移动10px，其自身宽度为5px，故需要占border宽度的5px。 */
+            outline-offset: -10px;
+        }
+        /* outline方案注意地方
+        1. 只使用两层边框场景
+        2. 边框不一定会粘合border-radius属性产生的圆角，因此元素可能是圆的，但其描边仍然是垂直的
+        3. 描边可以不是矩形的 */
+        .demo-6 {
+            background: yellowgreen;
+            border: 10px solid #655;
+            border-radius: 25px;
+            outline: 5px solid deeppink;
+            margin-top: 40px
+        }
+    </style>
+</head>
+
+<body>
+   <div class="demo-1">demo-1</div>
+   <div class="demo-2">demo-2</div>
+   <div class="demo-3">
+       <div class="demo-3-1">demo-3-1</div>
+       <div class="demo-3-2">demo-3-2</div>
+       <div class="demo-3-3">demo-3-3</div>
+       <div class="demo-3-4">demo-3-4</div>
+       <div class="demo-3-4">demo-3-5</div>
+       <div class="demo-3-6">demo-3-6</div>
+   </div>
+   <div class="demo-4">demo-4</div>
+   <div class="demo-5">
+        <div class="demo-5-1">demo-5-1</div>
+        <div class="demo-5-2">demo-5-2</div>
+        <div class="demo-5-3">demo-5-3</div>
+   </div>
+   <div class="demo-6">demo-6</div>
+</body>
+<script>
+    // 点击边框click事件生效：borde属性
+    document.getElementsByClassName('demo-3-1')[0].onclick = function() {
+        alert('click demo-3-1!');
+    }
+    // 点击边框click事件失效：box-shadow属性
+    document.getElementsByClassName('demo-3-2')[0].onclick = function() {
+        alert('click demo-3-2!');
+    }
+    // 以上可以通过box-shadow设置为inset(内圈)以及padding效果模拟实现
+    document.getElementsByClassName('demo-3-6')[0].onclick = function() {
+        alert('click demo-3-6!');
+    }
+</script>
+</html>

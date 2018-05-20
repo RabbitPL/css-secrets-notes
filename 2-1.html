@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <title>背景与边框--半透明边框</title>
+    <style>
+        body {
+            background: url('./img/bg-3.jpeg');
+        }
+        div {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+        }
+       /* 背景知识: box-shadow的基本用法；相关规范: css背景和边框 */
+       .bg-1 {
+           border: 10px solid hsla(0, 0%, 100%, .5);
+           background: white;
+       }
+       /* 使用半透明色不能实现半透明边框 */
+
+       /* 默认情况下，背景会延伸到边框所在的区域下层 */
+       .bg-2 {
+            background: black;
+            border: 10px dotted #efefef;
+       }
+
+        /*background-clip属性，默认为border-box,表示背景会被元素的border box(边框的外沿框)裁切掉。padding-box: 不希望背景侵入边框所在范围
+        对比bg-1和bg-3的效果*/
+       .bg-3 {
+           /* 半透明body背景的颜色 */
+           border: 10px solid hsla(0, 0%, 100%, .5);
+           background: white;
+           background-clip: padding-box;
+       }
+    </style>
+</head>
+
+<body>
+   <div class="bg-1"></div>
+   <div class="bg-2"></div>
+   <div class="bg-3"></div>
+</body>
+
+</html>
