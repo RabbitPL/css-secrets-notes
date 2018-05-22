@@ -1,0 +1,101 @@
+<html>
+
+<head>
+    <title>背景与边框--灵活的背景定位</title>
+    <style>
+        /* 知识背景: CSS背景与边框、CSS值与单位 */
+        
+        div {
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            margin: 20px;
+        }
+        /* 默认不设置样式:图片紧贴左上角 */
+        
+        .demo {
+            background: url('./img/code-pirate.svg') no-repeat #58a;
+        }
+        /* background-position: 指定背景图片距离任意角的偏移量，只是需要在偏移量前面指定关键字 */
+        
+        .demo-1 {
+            background: url('./img/code-pirate.svg') no-repeat #58a;
+            background-position: right 20px bottom 10px;
+        }
+        /* 回退机制(在不支持background-position浏览器中)，背景图片会紧贴在左上角(背景图片的默认位置) 
+           回退方案：把老套的bottom、right定位值写进background的简写属性中
+        */
+        
+        .demo-2 {
+            background: url('./img/code-pirate.svg') no-repeat bottom right #58a;
+        }
+        /* 在给背景图片设置距离某个角的偏移量时，有一种常见情况：偏移量与容器的内边距一致 */
+        
+        .demo-3 {
+            padding: 10px;
+            background: url('./img/code-pirate.svg') no-repeat #58a;
+            background-position: right 10px bottom 10px;
+        }
+        /* 以上demo-3，偏移量与内边距一致，但是每次改动内边距的值，都要同步修改background-position
+         */
+        
+        .demo-4 {
+            padding: 10px;
+            background: url('./img/code-pirate.svg') no-repeat #58a bottom right;
+            background-origin: content-box;
+        }
+        
+        .box {
+            background-color: #efefef;
+            position: relative;
+        }
+        
+        .box-padding {
+            background-color: #58a;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+        }
+        
+        .box-content {
+            background-color: #58e;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            right: 50px;
+            bottom: 50px;
+        }
+        /* 每个元素都有三个矩形框：content-box(内容区的外沿框)、padding-box(内边距的外延框)、border-box(边框的外延框)
+        默认情况下，background-position是以padding-box为准的（top left），这样边框才不会遮住背景；因此top、left默认指得失padding box的左上角。
+
+        background-origin:在默认情况下，它的值为padding-box，如果把其值设为content-box，则在background-position属性中使用的边角关键字将会以内容的边缘作为基准(此时背景图片距离边角的偏移量就跟内边距保持一致了)。如demo-4 
+         */
+        /* calc()方案: 如果以左上角(left top)偏移的思路，距离底边10px，则等于垂直(top)偏移量100% - 10px；距离右边20px，则等于水平(left)偏移100% - 20px*/
+        
+        .demo-5 {
+            background: url('./img/code-pirate.svg') no-repeat #58a;
+            background-position: calc(100% - 20px) calc(100% - 10px);
+        }
+        /* calc函数内部的-和+运算符的两侧各加一个空白符，否则会产生解析错误  */
+    </style>
+</head>
+
+<body>
+    <div class="demo"></div>
+    <div class="demo-1"></div>
+    <div class="demo-2"></div>
+    <div class="demo-3"></div>
+    <div class="demo-4"></div>
+    <div class="box">
+        Border Box
+        <p class="box-padding">
+            Padding Box
+            <p class="box-content">Content Box</p>
+        </p>
+    </div>
+    <div class="demo-5"></div>
+</body>
+
+</html>
