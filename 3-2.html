@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <title>形状--平行四边形</title>
+    <style>
+        /* 背景知识: 基本的CSS变形; 相关规范: css背景和边框 */
+        /* 创建一个按钮状的平行四边形链接 */
+        a {
+            background: #58a;
+            width: 5em;
+            height: 2em;
+            color: white;
+            display: inline-block;
+	        padding: .3em .3em;
+            text-transform: uppercase;
+	        text-decoration: none;
+            margin: 1em;
+            font-size: 2em;
+        }
+        .demo {
+            transform: skewX(-45deg); /*skew变形属性*/
+        }
+
+        /*以上效果--内容也发生了斜向变形。 怎么只让容器的形状倾斜，而保持其内容不变呢?
+        * 1. 嵌套元素
+        *    - 缺点： 结构层的变更是不允许；
+        */
+
+        .button { transform: skewX(-45deg);}
+        .button > div {transform: skewX(45deg);}
+
+        /*2. 伪元素方案---把所有样式(背景、边框等)应用到伪元素上，然后再对伪元素进行变形*/
+
+        /* 关键点一---伪元素能自动继承其宿主元素的尺寸，甚至当宿主元素的尺寸是由其内容来决定时依然如此 
+        *  解决办法---宿主元素设置应用position: relative属性，伪元素设置position:absolute属性，再把所有偏移量设为0，让其在水平垂直方向始终拉伸为宿主元素尺寸
+        * 该方法适用于其他任何样式变形，实现变形元素而不变形内容*/
+
+        .button-pseudo {
+            position: relative;
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+
+        .button-pseudo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -1; /*此时伪元素在宿主之上，如果设置背景会遮盖内容，故修改z-index*/
+            background: #58a;
+            transform: skewX(45deg);
+            padding: 1em;
+            width: 3.5em;
+        }  
+
+        /*使用rotate实行一个菱形*/
+        .diamond {
+            font-size: 2em;
+            margin-top: 3em;
+            position: relative;
+            padding-top: 1.5em;
+        }
+        .diamond::before {
+            content: '';
+            background: #fb3;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+            width: 5em;
+            height: 5em;
+            transform: rotate(45deg);
+        }
+
+        /*以上方法，还有多种应用场景: 1. 实现多重背景；2. 实现边框内圆角； 3.为某一层“背景”单独设置类似opacity样属性； 4.模拟多层边框*/
+        .all-demos {
+            margin-top: 7em;
+            border: 1px solid red;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <a class="demo" href="http://www.kaola.com" target="blank">Click me</a>
+    <a class="button" href="http://www.kaola.com" target="blank">
+        <div>Click me</div>
+    </a>
+    <div class="button-pseudo" href="http://www.kaola.com" target="blank">Click me</div>
+    <div class="diamond">
+        diamond
+    </div>
+    <div class="all-demos">
+
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <title>形状--自适应椭圆</title>
+    <style>
+        /* 背景知识: border-radius属性的基本用法; 相关规范: css背景和边框、CSS基本UI特性 */
+        /* 给一个正方形元素，设置一个足够大的border-radius就能将其变成圆形 */
+  
+        .demo-1-circle {
+            background: #fb3;
+            width: 200px;
+            height: 200px;
+            border-radius: 100px; /* >= 正方形边长的一半*/
+        }
+
+        /*产生以上形状原因: 当任意两个相邻圆角的半径之和超过border box的尺寸时，用户代理必须按比例减少各个边框半径所使用的值，直到它们不会相互重叠为止*/
+        
+        /*常见场景：一般不指定宽高，而是根据其内容自动调整并适应，最终希望达到效果--如果它宽高相等，就显示为一个圆；如果宽高不等，就显示为一个椭圆*/
+        /**
+        *解决方案：1. border-radius可以单独指定水平和垂直半径，只要用一个斜杠(/)分割这两个值---可以在拐角，创建椭圆圆角(eg: border-radius: 100px / 75px)
+                 2. border-radius不仅可以接受长度值，还可以接受百分比值。这个百分比值会基于元素的尺寸进行解析。---相同百分比可能会计算出不同的水平和垂直半径(eg: border-radius: 50% / 50%)
+                 3. 斜杠前后两个值一致(最终计算值可能不同)，可以简写
+        */
+        .demo-2 {
+            width: 16em;
+            height: 10em;
+            border-radius: 50%;
+            background: #fb3;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class="demo-1-circle"></div>
+    <div class="demo-2"></div>
+</body>
+
+</html>
