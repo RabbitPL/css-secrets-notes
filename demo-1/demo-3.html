@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>css编码技巧--尽量减少代码重复</title>
+    <style>
+    .code {
+        background-color: #333;
+        padding: 20px;
+        margin-top: 10px;
+    }
+    .wrapper {
+        width: 800px;
+        margin: 0 auto;
+        display: flex;
+        background-color: #fafafa;
+    }
+    .wrapper div {
+        padding: 10px;
+        background-color: rgb(41,73,130);
+        color: #fff;
+        border-radius: 5px;
+    }
+    .example1 {
+        height: 25em;
+        /* align-items: center; */
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    /* .example1 div:first-child {
+        font-size: 150%;
+    } */
+    </style>
+</head>
+
+<body>
+    <div class="code">
+        <div class="wrapper example1">
+            <div>One
+                <br>... is taller
+                <br>than the rest.</div>
+            <div>Two</div>
+            <div>Three</div>
+            <div>Four</div>
+            <div>Five</div>
+            <div>Six</div>
+        </div>
+    </div>
+</body>
+
+</html>

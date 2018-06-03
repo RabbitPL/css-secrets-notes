@@ -1,0 +1,114 @@
+<html>
+
+<head>
+    <title>a-guide-to-flexbox</title>
+    <style>
+    .container {
+        display: flex;
+        border: 1px solid #333;
+        height: 100px;
+        flex-direction: row; /*row(默认) | row-reverse | column | column-reverse*/
+        justify-content: space-between; /*定义主轴对齐方式。flex-start(默认) | flex-end | center | space-between | space-around | space-evenly;*/
+        /* align-items: flex-start;cross-axis上类似justify-content的作用flex-start | flex-end | center | baseline | stretch(默认); */
+        align-content: space-between;/*flex-start | flex-end | center | space-between | space-around | stretch;只有一个item时，该属性无效*/
+    }
+
+    .container {
+        max-width: 1000px; /*尝试改变该值，看真是结果，即进行缩放看效果*/
+        margin: 0 auto; 
+    }
+
+    .items:nth-child(1) {
+        order: 4;
+        flex-grow: 1;
+    }
+    .items:nth-child(2) {
+        order: 3;
+        flex-grow: 1;
+    }
+    .items:nth-child(3) {
+        order: 2;
+        flex-grow: 1;
+    }
+    .items:nth-child(4) {
+        order: 1;
+        flex-grow: 1;
+    }
+    .items:nth-child(5) {
+        order: 0; /*从0开始，默认为0*/
+        flex-grow: 2;
+        align-self: flex-end;
+    }
+    .items, .items-1 {
+        margin: 10px; /*为什么使用flex之后，内部的margin不会合并（确实不会合并）了?*/
+        padding: 10px;
+        width: 110px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.2),0 1px 5px 0 rgba(0,0,0,.12);
+    }
+    body {
+        font: 1em/1.4 Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #fafafa;
+    }
+
+    .container-1 {
+        display: flex;
+        border: 1px solid #333;
+        flex-direction: column;
+        /* flex-wrap: wrap-reverse; (nowrap[默认] | wrap | wrap-reverse) */
+        justify-content: space-evenly; /*flex-start(默认) | flex-end | center | space-between | space-around | space-evenly(貌似支持度还不够);*/
+        /* align-items: flex-start;cross-axis上类似justify-content的作用flex-start | flex-end | center | baseline | stretch(默认); */
+        align-content: space-between;/*该属性的效果，好像没有get到flex-start | flex-end | center | space-between | space-around | stretch(默认);只有一个item时，该属性无效*/
+    }
+    /**flex-shrink: 效果?*/
+
+    .container-1 {
+        max-width: 300px; /*尝试改变该值，看真是结果，即进行缩放看效果*/
+        margin: 0 auto; 
+    }
+    .items-1:nth-child(5) {
+        order: 0; /*从0开始，默认为0*/
+        align-self: flex-end;
+    }
+    /*float,clear,vertical-align对盒子元素item无效*/
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="items">
+            flex item one
+        </div>
+        <div class="items">
+            flex item two
+        </div>
+        <div class="items">
+            flex item three
+        </div>
+        <div class="items">
+            flex item four
+        </div>
+        <div class="items">
+            flex item five
+        </div>
+    </div>
+    <div class="container-1">
+        <div class="items-1">
+            flex item one
+        </div>
+        <div class="items-1">
+            flex item two
+        </div>
+        <div class="items-1">
+            flex item three
+        </div>
+        <div class="items-1">
+            flex item four
+        </div>
+        <div class="items-1">
+            flex item five
+        </div>
+    </div>
+</body>
+
+</html>

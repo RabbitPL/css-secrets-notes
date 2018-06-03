@@ -1,0 +1,174 @@
+<html>
+
+<head>
+    <title>使用flex实现剧中</title>
+    <style>
+        .parent {
+            display: flex;
+            height: 380px;
+            width: 680px;
+            border: 1px solid #efefef;
+        }
+
+        .child {
+            width: 100px; 
+            height: 100px; 
+            margin: auto;  /*实现子元素剧中(只有一个子元素)。flex中设置margin:auto会吸收额外边距(怎么理解?)*/
+            border: 1px solid #333;
+        }
+
+        
+        .flex-container {
+            display: flex; /*1*/
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            /*子元素宽度一定，父元素根据容器宽度调整其排列*/
+            flex-flow: row wrap; /*3*/
+            justify-content: space-around; /*2*/
+        }
+
+        .flex-item {
+            background: tomato;
+            padding: 5px;
+            width: 200px;
+            height: 150px;
+            margin-top: 10px;
+            
+            line-height: 150px;
+            color: white;
+            font-weight: bold;
+            font-size: 3em;
+            text-align: center;
+        }
+
+        .navigation {
+            list-style: none;
+            margin: 0;        
+            background: deepskyblue;
+            display: flex;          
+            flex-flow: row wrap;/*因为元素宽度较小，故不会在需要横着的时候折行折行*/
+            justify-content: flex-end; /*从右向左*/
+        }
+
+        .navigation a {
+            text-decoration: none;
+            /* width: 200px; 假如这个宽度较大，则该方案则不能生效*/
+            display: block;
+            padding: 1em;
+            color: white;
+        }
+
+        .navigation a:hover {
+            background: darken(deepskyblue, 2%);
+        }
+        
+        /*对于这个效果的实现，还是有点不是很明白为什么header和footer要100%*/
+        @media all and (max-width: 800px) {
+            .navigation {
+                justify-content: space-around;
+            }
+        }
+
+        @media all and (max-width: 600px) {
+            .navigation {
+                -webkit-flex-flow: column wrap;
+                flex-flow: column wrap;
+                padding: 0;
+            }
+            
+            .navigation a { 
+                text-align: center; 
+                padding: 10px;
+                border-top: 1px solid rgba(255,255,255,0.3); 
+                border-bottom: 1px solid rgba(0,0,0,0.1); 
+            }
+
+            
+            .navigation li:last-of-type a {
+                border-bottom: none;
+            }
+        }
+        .wrapper {
+            display: flex;  
+            flex-flow: row wrap; /*行布局*/
+            font-weight: bold;
+            text-align: center;
+        }
+        .wrapper > * {
+            padding: 10px;
+            flex: 1 100%; /*flex-grow, flex-shrink and flex-basis。100%很重要（设置的是flex-basis??）！！*/
+        }
+
+        .header {
+            background: tomato;
+        }
+
+        .footer {
+            background: lightgreen;
+        }
+
+        .main {
+            text-align: left;
+            background: deepskyblue;
+        }
+
+        .aside-1 {
+            background: gold;
+        }
+
+        .aside-2 {
+            background: hotpink;
+        }
+
+        @media all and (min-width: 600px) {
+            .aside { flex: 1 auto; }
+        }
+
+        @media all and (min-width: 800px) {
+            .main    { flex: 3 0px; }
+            .aside-1 { order: 1; } 
+            .main    { order: 2; }
+            .aside-2 { order: 3; }
+            .footer  { order: 4; } 
+        }
+
+        body {
+            padding: 2em; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <header class="header">Header</header>
+        <article class="main">
+          <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>  
+        </article>
+        <aside class="aside aside-1">Aside 1</aside>
+        <aside class="aside aside-2">Aside 2</aside>
+        <footer class="footer">Footer</footer>
+    </div>
+    <!-- <ul class="navigation">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul> -->
+
+    <!-- <div class="parent">
+        <div class="child"></div>
+    </div>
+ 
+     <ul class="flex-container">
+         <li class="flex-item">1</li>
+         <li class="flex-item">2</li>
+         <li class="flex-item">3</li>
+         <li class="flex-item">4</li>
+         <li class="flex-item">5</li>
+         <li class="flex-item">6</li>
+     </ul> -->
+ 
+</body>
+
+</html>
