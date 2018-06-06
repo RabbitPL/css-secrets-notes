@@ -1,0 +1,52 @@
+<html>
+
+<head>
+    <title>背景与边框--条纹背景</title>
+    <style>
+        /* 背景知识: CSS线性渐变；background-size； 相关规范: css背景和边框、CSS基本UI特性 */
+        /* 实现一个需要一个容器：只有内侧有圆角，而边框或描边的四个角在外部仍然保持直角的形状 */
+        /* 用两个元素实现效果 */
+        
+        .demo-1-outer {
+            background: #655;
+            padding: .8em;
+            margin-bottom: 10px;
+        }
+        
+        .demo-1-inner {
+            background: tan;
+            border-radius: .8em;
+            padding: 1em;
+        }
+        /*如果只用一个元素:充分运用背景的能力(border-radius + box-shadow + outline,使用一个元素实现)
+            1. 描边(outline)并不会跟着元素的圆角走(因而显示出直角)，但是box-shadow却会(box-shadow刚好填补描边与容器圆角之间的空隙)
+            2. box-shadow的扩张值并不一定等于描边的宽度，我们只需要指定一个足够填补“空隙”的扩张值就可以了。 不通浏览器扩张值可能会产生渲染异常，因此
+            【到底多大的投影扩张值可以填补这些空隙呢?】=== 
+        
+            // TODO: 实现整个过程demo解析，以及值计算，后面再回顾一下
+         */
+        
+        .demo-2 {
+            margin: 10px;
+            background: tan;
+            border-radius: .8em;
+            padding: 1em;
+            box-shadow: 0 0 0 .6em #655;
+            outline: .8em solid #655;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-1-outer">
+        <div class="demo-1-inner">
+            I have a nice subtle inner rounding, don't I look pretty?
+        </div>
+    </div>
+    <hr/>
+    <div class="demo-2">
+        I'm sad element, because my outline doesn't get along with my round corners;
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<html>
+
+<head>
+    <title>结构统与布局--精确控制表格列宽</title>
+    <style>
+        body {
+            background: #ddd
+        }
+        
+        section {
+            width: 500px;
+            margin: 2em;
+            background: white;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin-bottom: 1em;
+            width: 100%;
+        }
+        
+        td {
+            border: 1px solid #aaa;
+        }
+        
+        td.preformatted {
+            white-space: pre;
+            /*这个怎么理解?*/
+            font-family: Consolas, Monaco, monospace;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        
+        section+section table {
+            table-layout: fixed
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h1>With table-layout: fixed</h1>
+        <div>
+            <table>
+                <tr>
+                    <td>If we don’t…</td>
+                    <td>specify a cell width, they will be assigned one that depends on their contents. Notice how the cell with the more content here is much wider.</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td>If we don’t…</td>
+                    <td>specify a cell width, they will be assigned one that depends on their contents. Notice how the cell with the more content here is much wider.</td>
+                </tr>
+                <tr>
+                    <td>All rows take part in calculating the widths, not just the first one.</td>
+                    <td>Notice how the dimensions here are different than the previous example.</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <!-- 超出表格宽度，按照比例压缩 -->
+                    <td style="width: 1000px">If we specify a width, it will not always be followed. I have a width of <code>1000px</code>…</td>
+                    <td style="width: 2000px">…and I have a width of <code>2000px</code>. Because there’s not enough space for <code>3000px</code>, they are reduced proportionally, to 33.3% and 66.6% of the total width.</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td>If we prevent word wrapping, the table can become so wide it grows beyond its container.</td>
+                    <td class="preformatted">…and <code>text-overflow: ellipsis</code> doesn’t help either.</td>
+                </tr>
+            </table>
+
+            <table>
+                <tr>
+                    <td>Large images and blocks of code can also cause the same issue.</td>
+                    <td><img src="http://lea.verou.me/book/panoramic.jpg" /></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <section>
+        <div>
+            <section>
+                <h1>With table-layout: fixed</h1>
+                <div>
+                    <!-- 使用完fixed之后，如果不设置任何宽度，表格列宽将会自动平均分配，后续的表格行并不会影响列宽；给单元格指定的很大宽度也会直接生效，并不会自动缩小；overflow和text-overflow属性都可正常生效 -->
+                    <table>
+                        <tr>
+                            <td>If we don’t…</td>
+                            <td>specify a cell width, they will be assigned one that depends on their contents. Notice how the cell with the more content here is much wider.</td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>If we don’t…</td>
+                            <td>specify a cell width, they will be assigned one that depends on their contents. Notice how the cell with the more content here is much wider.</td>
+                        </tr>
+                        <tr>
+                            <td>All rows take part in calculating the widths, not just the first one.</td>
+                            <td>Notice how the dimensions here are different than the previous example.</td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <!-- 超出表格宽度，按照比例压缩 -->
+                            <td style="width: 1000px">If we specify a width, it will not always be followed. I have a width of <code>1000px</code>…</td>
+                            <td style="width: 2000px">…and I have a width of <code>2000px</code>. Because there’s not enough space for <code>3000px</code>, they are reduced proportionally, to 33.3% and 66.6% of the total width.</td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>If we prevent word wrapping, the table can become so wide it grows beyond its container.</td>
+                            <!-- 配合white-space: pre;以及text-overflow: ellipsis;overflow: hidden;实现内容超出宽度显示... -->
+                            <td class="preformatted">…and <code>text-overflow: ellipsis</code> doesn’t help either.</td>
+                        </tr>
+                    </table>
+
+                    <table>
+                        <tr>
+                            <td>Large images and blocks of code can also cause the same issue.</td>
+                            <td><img src="http://lea.verou.me/book/panoramic.jpg" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </section>
+</body>
+
+</html>

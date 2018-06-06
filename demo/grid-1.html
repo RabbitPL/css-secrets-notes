@@ -1,0 +1,128 @@
+<html>
+
+<head>
+    <title>背景与边框--条纹背景</title>
+    <style>
+        .cards {
+            display: flex;
+        }
+        
+        html {
+            box-sizing: border-box;
+        }
+        
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+        
+        body {
+            font: 1em/1.4 Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+        }
+        
+        img {
+            max-width: 100%;
+        }
+        
+        .cards,
+        .cards-grid {
+            margin: 10px auto;
+            max-width: 800px;
+        }
+        
+        .card,
+        .card-grid {
+            background-color: #fff;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+        }
+        
+        .card,
+        .card-grid header {
+            padding: 10px;
+            background-color: rgb(41, 73, 130);
+            color: #fff;
+        }
+        
+        .card,
+        .card-grid header h2 {
+            font-size: 1.4rem;
+            font-weight: normal;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .card,
+        .card-grid .body {
+            padding: 10px;
+            font-size: .9rem;
+            color: #757575;
+        }
+        
+        .cards-grid {
+            display: grid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cards">
+        <div class="card">
+            <header>
+                <h2>Bristol</h2>
+            </header>
+        </div>
+
+        <div class="card">
+            <header>
+                <h2>Harbour Cranes</h2>
+            </header>
+        </div>
+
+        <div class="card">
+            <header>
+                <h2>Striped Balloon</h2>
+            </header>
+            <div class="body">
+                <p>I like the nice standard balloons.
+                    <br>Stripy. Solid looking basket.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="cards-grid">
+        <div class="card-grid">
+            <header>
+                <h2>Bristol</h2>
+            </header>
+        </div>
+
+        <div class="card-grid">
+            <header>
+                <h2>Harbour Cranes</h2>
+            </header>
+        </div>
+
+        <div class="card-grid">
+            <header>
+                <h2>Striped Balloon</h2>
+            </header>
+            <div class="body">
+                <p>I like the nice standard balloons.
+                    <br>Stripy. Solid looking basket.</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- 这个可以作为一个解释grid的参考点
+    <div style="display: grid;">
+        <a>111</a>
+        <a>222</a>
+        <a>333</a>
+    </div> -->
+</body>
+
+</html>
