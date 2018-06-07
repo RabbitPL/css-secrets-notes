@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>结构统与布局--根据兄弟元素的数量来设置样式</title>
+    <style>
+        /* 要根据兄弟元素的总数来为它们设置样式，假设仅当列表项总数为4时才对列表设置样式 可以使用li:nth-child(4) --选择列表中的第四项
+            :nth-child() 与:nth-of-type()的区别
+            兄弟选择符~，结合兄弟选择符。li:nth-child(4), li:nth-child(4) ~ li表示选择第四列及之后的所有列表项目
+            :only-child表示只有一个列表项目li的时候选中，实际上:only-child等价于:first-child:last-child而:last-child是:nth-last-child(1)的简写
+            li:first-child:nth-last-child(1)就相当于li:only-child
+         */
+        /* li:first-child:nth-last-child(4)表示选择一个正好有4个列表项的列表中的第一个元素
+        而 li:first-child:nth-last-child(4), li:first-child:nth-last-child(4) ~ li表示这个列表正好包含4个项目时，选中它的每一项
+         */
+        /* 根据兄弟数量的范围来匹配元素，n+b表示可以选择从第b个开始的所有子元素,即:nth-child(n+4)将会选中除第一、第二和第三个子元素之外的所有子元素 
+        li:first-child:nth-last-child(n+4), li:first-child:nth-last-child(n+4)~li表示至少包含4个列表项目时，命中所有列表项目
+        */
+        /* -n+b表示可以选中开头的b个元素;li:first-child:nth-last-child(-n+4), li:first-child:nth-last-child(-n+4)表示最多包含4项时，命中所有列表项*/
+        /* li:first-child:nth-last-child(n+2):nth-last-child(-n+6), li:first-child:nth-last-child(n+2):nth-last-child(-n+6) ~ li表示当列表包含2~6项时候，选择所有列表项 */
+        /* 参考：http://dabblet.com/gist/70c434a6e802b062f494 */
+        /* 相关规范: 选择符 */
+    </style>
+</head>
+
+<body>
+
+</body>
+
+</html>
