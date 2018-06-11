@@ -1,0 +1,119 @@
+<html>
+
+<head>
+    <title>结构统与布局--垂直居中</title>
+    <style>
+        /**
+        * 水平居中
+        1. 如果是行内元素，对其父类元素使用text-align: center;
+        2. 如果是块级元素，就对其自身设置margin: 0 auto;
+         */
+        /**
+        *水平垂直居中
+        1. 表格布局大法: 需要使用冗余的HTML元素
+        2. 行内块法: hack味道较重
+        */
+        /**
+        基于绝对定位的解决方案
+        1. 要求元素有固定的宽度和高度   
+        */
+        
+        main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /*宽度的一半*/
+            margin-top: -6em;
+            /*高度的一半*/
+            margin-left: -9em;
+            width: 18em;
+            height: 12em;
+        }
+        /*以上代码还可以使用calc*/
+        
+        div.calc {
+            position: absolute;
+            top: calc(50% - 6em);
+            left: calc(50% - 9em);
+            width: 18em;
+            height: 12em;
+            background: #333;
+            color: white;
+        }
+        /*通常情况下，对于那些要居中的元素，其尺寸是由内容决定的，因此如果找到一个属性的百分比值能够以元素宽度作为解析基准，那么问题就解决了；
+        然而绝大多数css属性(包括margin)百分比都是以其父元素的尺寸作为基准进行解析的*/
+        /* CSS变形属性：当我们使用translate()变形函数中使用百分比值时，是以这个元素宽度和高度为基准进行换算和移动的 */
+        
+        div.translate {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #111;
+            color: white;
+            padding: 40px;
+        }
+        /* 但是该方法任有一些问题
+        1. 绝对定位有时候对整个布局影响太大；
+        2. 如果需要居中的元素，顶部超过视口，其内容会被截掉；
+        3.  */
+        /*相关规范：CSS值与单位*/
+    </style>
+</head>
+
+<body>
+    <!-- <main>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+    </main>
+    <div class="calc">
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+    </div>
+    <div class="translate">
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+    </div> -->
+    <div class="translate">
+        <!-- 前面的数据已经被裁掉 -->
+        <h1>11. Am I centered yet?</h1>
+        <p>12. enter me,please!</p>
+        <h1>13. Am I centered yet?</h1>
+        <p>14. Center me,please!</p>
+        <h1>15. Am I centered yet?</h1>
+        <p>16. Center me,please!</p>
+        <h1>17. Am I centered yet?</h1>
+        <p>18. Center me,please!</p>
+        <h1>19. Am I centered yet?</h1>
+        <p>20. Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <!-- 此处开始显示 -->
+        <p>23.Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>Center me,please!</p>
+        <h1>Am I centered yet?</h1>
+        <p>33. Center me,please!</p>
+    </div>
+</body>
+
+</html>
