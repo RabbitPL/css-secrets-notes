@@ -3,31 +3,38 @@
 <head>
     <title>理解flexbox</title>
     <style>
-    /**
+        /**
     *1. 父元素与子元素
      2. flex container和flex items
      3. 原始布局: float 、 table
     */
-    /*使父元素，成为一个弹性容器(flex container), li变成flex items*/
-    ul.demo-1 {
-        display: flex; /*或者 inline-flex*. 启动flexbox格式化上下文*/
-        list-style-type: none;
-        /* flex-wrap: wrap-reverse;  注意：如果设置wrap，但是不设置其他属性，则会根据其自身大小宽度显示 */
-        flex-flow: row wrap-reverse; /*flex-direction flex-wrap*/
-        align-content: center; /*ul高度指定，li高度不定；或者ul根据li内容高度显示，而li不指定具体高度*/
-        height: 200px;
-        align-items: stretch; /*如果设置flex-wrap为wraper，此时align-content与align-items相比不生效。但是align-content是把wrap元素看成一个整体，相对于container定为的*/
-    }
-    ul.demo-1 > li {
-        /* flex: 1 100%; 如果不设置flex-wrap：wraper,则不会折行，依旧最大行平均分配 */
-    }
-    li {
-        width: 100px;
-        height: 100px;
-        background-color: #8cacea;
-        margin: 8px;
-    }
-    /*
+        /*使父元素，成为一个弹性容器(flex container), li变成flex items*/
+        
+        ul.demo-1 {
+            display: flex;
+            /*或者 inline-flex*. 启动flexbox格式化上下文*/
+            list-style-type: none;
+            /* flex-wrap: wrap-reverse;  注意：如果设置wrap，但是不设置其他属性，则会根据其自身大小宽度显示 */
+            flex-flow: row wrap-reverse;
+            /*flex-direction flex-wrap*/
+            align-content: center;
+            /*ul高度指定，li高度不定；或者ul根据li内容高度显示，而li不指定具体高度*/
+            height: 200px;
+            align-items: stretch;
+            /*如果设置flex-wrap为wraper，此时align-content与align-items相比不生效。但是align-content是把wrap元素看成一个整体，相对于container定为的*/
+        }
+        
+        ul.demo-1>li {
+            /* flex: 1 100%; 如果不设置flex-wrap：wraper,则不会折行，依旧最大行平均分配 */
+        }
+        
+        li {
+            width: 100px;
+            height: 100px;
+            background-color: #8cacea;
+            margin: 8px;
+        }
+        /*
     flexbox模型基础
     1. Flex container: 设置为displaye:flex的父元素
     2. Flex items: flex容器内的子元素
@@ -37,59 +44,65 @@
     flex items属性
     主轴和交叉轴是不会变得么
     */
-
-     ul.demo-2 {
-        border: 1px solid red;
-        padding: 0;
-        list-style: none;
-        background-color: #e8e8e9;
-        display: flex;
-        align-items: baseline; /*在ul设置height，而li没有固定height的情况下，该属性表现比较明显；而如果li设置height，而ul未设置，则不明显*/
-        /* height: 200px; 如果未设置高度，则其高度由子元素最大高度计算,因此使用flex布局，如果内外层元素都不设置高度，则所有高度都取子元素最大高度 */
-     }
-
-    ul.demo-2 > li {
-        background-color: #8cacea;
-        width: 100px;
-        /* height: 100px; */ /*不设置高度，ul也设置高度，则根据最大内容适应*/
-        margin: 8px;
-        padding: 4px;
-    }
-
-    /* baseline的理解？？？ */
-
-    /* order属性的默认值为0，可以取负值，flex根据order的值重新排序，从低到高 */
-    /* 默认情况下所有li的order值都为0. 表现形式有点想z-index。如果两个元素具有相同的order，则根据其再html中出现的顺序排序，出现再后面(兄弟节点)的排在后面 
+        
+        ul.demo-2 {
+            border: 1px solid red;
+            padding: 0;
+            list-style: none;
+            background-color: #e8e8e9;
+            display: flex;
+            align-items: baseline;
+            /*在ul设置height，而li没有固定height的情况下，该属性表现比较明显；而如果li设置height，而ul未设置，则不明显*/
+            /* height: 200px; 如果未设置高度，则其高度由子元素最大高度计算,因此使用flex布局，如果内外层元素都不设置高度，则所有高度都取子元素最大高度 */
+        }
+        
+        ul.demo-2>li {
+            background-color: #8cacea;
+            width: 100px;
+            /* height: 100px; */
+            /*不设置高度，ul也设置高度，则根据最大内容适应*/
+            margin: 8px;
+            padding: 4px;
+        }
+        /* baseline的理解？？？ */
+        /* order属性的默认值为0，可以取负值，flex根据order的值重新排序，从低到高 */
+        /* 默认情况下所有li的order值都为0. 表现形式有点想z-index。如果两个元素具有相同的order，则根据其再html中出现的顺序排序，出现再后面(兄弟节点)的排在后面 
     当两个或多个弹性项目具有相同的order值时，重新排序基于他们在源文件中的位置。*/
-    ul.demo-3 {
-        display: flex;
-        list-style: none;
-    }
-
-    ul.demo-3 > li{
-        background-color: #8cacea;
-        width: 100px;
-        height: 100px;
-        margin: 8px;
-        padding: 4px;
-    }
-
-    ul.demo-3 > li:nth-child(1) {
-        order: 4;   /*give it a value higher than 0*/
-    }
-    ul.demo-3 > li:nth-child(2) {
-        order: 4;   /*give it a value higher than 0*/
-    }
-
-    
+        
+        ul.demo-3 {
+            display: flex;
+            list-style: none;
+        }
+        
+        ul.demo-3>li {
+            background-color: #8cacea;
+            width: 100px;
+            height: 100px;
+            margin: 8px;
+            padding: 4px;
+        }
+        
+        ul.demo-3>li:nth-child(1) {
+            order: 4;
+            /*give it a value higher than 0*/
+        }
+        
+        ul.demo-3>li:nth-child(2) {
+            order: 4;
+            /*give it a value higher than 0*/
+        }
     </style>
 </head>
 
 <body>
-    <ul class="demo-1"> <!--parent element-->
-        <li>1</li> <!--first child element-->
-        <li>2</li> <!--second child element-->
-        <li>3</li> <!--third child element-->
+    <ul class="demo-1">
+        <!--parent element-->
+        <li>1</li>
+        <!--first child element-->
+        <li>2</li>
+        <!--second child element-->
+        <li>3</li>
+        <!--third child element-->
         <li>4</li>
         <li>5</li>
         <li>6</li>
@@ -118,7 +131,7 @@
         <li>1</li>
         <li>2</li>
         <li>3</li>
-        <li>4</li>                          
+        <li>4</li>
     </ul>
     <!-- 默认情况下flex-grow属性设置为0.表示flex-item不会增长以适应整个可用空间。 -->
     <!-- 默认情况下，shrink属性设置为1.默认会缩小，而如果ul设置宽度较小，当li超出宽度时,会按比例缩小，而如果设置为0，则内容会超出
@@ -134,8 +147,8 @@
         <li style="flex: 0 1 auto;width:500px;">I am a simple list</li>
     </ul>
 
-     <!-- flex: 00 auto; 不会缩放，缩小ul变小，内层溢出;宽度根据内容宽度定，即500px   flex:none;-->
-     <ul style="display: flex;border: 1px solid red;">
+    <!-- flex: 00 auto; 不会缩放，缩小ul变小，内层溢出;宽度根据内容宽度定，即500px   flex:none;-->
+    <ul style="display: flex;border: 1px solid red;">
         <li style="flex: 0 0 auto;width:500px;">I am a simple list</li>
         <li style="flex: 0 0 auto;width:500px;">I am a simple list</li>
     </ul>
